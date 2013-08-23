@@ -1,0 +1,11 @@
+name: <%= _.slugify(projectName) %>
+markdown: redcarpet
+pygments: true
+
+source:      _/jekyll
+destination: dist
+include:     []
+exclude:     []
+timezone:    -4
+
+baseurl: "/"

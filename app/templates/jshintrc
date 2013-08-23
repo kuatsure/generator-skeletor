@@ -1,0 +1,16 @@
+{
+  "curly":      true,
+  "camelcase":  true,
+  "eqnull":     true,
+  "eqeqeq":     true,
+  "latedef":    true,
+  "undef":      true,
+  "unused":     true,
+  "bitwise":    true,
+  "smarttabs":  false,
+  "jquery":     true,
+  "devel":      true,
+  "globals":    {
+                  "document": true
+                }
+}
