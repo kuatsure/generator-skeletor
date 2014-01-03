@@ -1,4 +1,8 @@
-# generator-skeletor [![Build Status](https://secure.travis-ci.org/kuatsure/generator-skeletor.png?branch=master)](https://travis-ci.org/kuatsure/generator-skeletor)
+# generator-skeletor
+
+[![Build Status](https://secure.travis-ci.org/kuatsure/generator-skeletor.png?branch=master)](https://travis-ci.org/kuatsure/generator-skeletor)
+[![Dependency Status](https://david-dm.org/kuatsure/generator-skeletor.png?theme=shields.io)](https://david-dm.org/kuatsure/generator-skeletor)
+[![Views in the last 24 hours](https://sourcegraph.com/api/repos/github.com/kuatsure/generator-skeletor/counters/views-24h.png)](https://sourcegraph.com/github.com/kuatsure/generator-skeletor)
 
 ### Yeoman Generators
 
