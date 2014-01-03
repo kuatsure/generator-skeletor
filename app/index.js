@@ -20,8 +20,8 @@ SkeletorGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
 
   // have Yeoman greet the user.
-  console.log(this.yeoman);
-  console.log('Out of the box I include jQuery and Modernizr.');
+  // console.log(this.yeoman);
+  console.log('Everything comes to he who waits... and I have waited so very long for this moment.');
 
   var prompts = [{
     name: 'projectName',
@@ -36,25 +36,19 @@ SkeletorGenerator.prototype.askFor = function askFor() {
     name: 'stylesLang',
     message: 'Preferred styles language ( Sass comes with compass & inuit.css )',
     choices: [ 'sass', 'less', 'vanilla' ]
-  }, {
-    type: 'list',
-    name: 'markupLang',
-    message: 'Preferred markup language',
-    choices: [ 'jekyll', 'haml', 'html' ]
   }];
 
   this.prompt(prompts, function (props) {
     this.projectName = props.projectName;
     this.scriptsLang = props.scriptsLang;
     this.stylesLang = props.stylesLang;
-    this.markupLang = props.markupLang;
 
     cb();
   }.bind(this));
 };
 
 SkeletorGenerator.prototype.app = function app() {
-  this.mkdir('_');
+  this.mkdir('app');
 
   this.template('_package.json', 'package.json');
   this.copy('editorconfig', '.editorconfig');
@@ -75,61 +69,47 @@ SkeletorGenerator.prototype.gruntfile = function gruntfile() {
 };
 
 SkeletorGenerator.prototype.projectfiles = function projectfiles() {
-  this.mkdir('_/img');
-  this.mkdir('_/fonts');
-  this.mkdir('_/public');
+  this.mkdir('app/img');
+  this.mkdir('app/fonts');
+  this.mkdir('app/public');
 
-  this.copy('htaccess', '_/public/.htaccess');
+  this.copy('htaccess', 'app/public/.htaccess');
+  this.copy('Skeletor.jpg', 'app/img/Skeletor.jpg');
 };
 
 SkeletorGenerator.prototype.scripts = function scripts() {
   if ( this.scriptsLang === "coffeescript" ) {
-    this.mkdir('_/coffee');
-    this.copy('main.coffee', '_/coffee/main.coffee');
+    this.mkdir('app/coffee');
+    this.copy('main.coffee', 'app/coffee/main.coffee');
 
   } else {
-    this.mkdir('_/js');
-    this.copy('main.js', '_/js/main.js');
+    this.mkdir('app/js');
+    this.copy('main.js', 'app/js/main.js');
     this.copy('jshintrc', '.jshintrc');
   }
 };
 
 SkeletorGenerator.prototype.styles = function styles() {
-  this.mkdir('_/css');
+  this.mkdir('app/css');
 
   if ( this.stylesLang === "sass" ) {
-    this.mkdir('_/sass');
-    this.mkdir('_/sass/partials');
-    this.copy('screen.scss', '_/sass/screen.scss');
-    this.copy('includes.scss', '_/sass/partials/_includes.scss');
+    this.mkdir('app/sass');
+    this.copy('screen.scss', 'app/sass/screen.scss');
+    this.copy('imports.scss', 'app/sass/_imports.scss');
     this.copy('_config.rb', 'config.rb');
 
   } else if ( this.stylesLang === "less" ) {
-    this.mkdir('_/less');
-    this.mkdir('_/less/partials');
-    this.copy('screen.less', '_/sass/screen.less');
+    this.mkdir('app/less');
+    this.copy('imports.less', 'app/less/imports.less');
+    this.copy('screen.less', 'app/less/screen.less');
 
   } else {
-    this.copy('screen.css', '_/css/screen.css');
+    this.copy('inuit.css', 'app/css/inuit.css');
+    this.copy('screen.css', 'app/css/screen.css');
   }
 };
 
 SkeletorGenerator.prototype.markup = function markup() {
-  if ( this.markupLang === "jekyll" ) {
-    this.mkdir('_/jekyll');
-    this.mkdir('_/jekyll/_layouts');
-    this.copy('jekyll_default.html', '_/jekyll/_layouts/default.html');
-    this.mkdir('_/jekyll/_posts');
-    this.mkdir('_/jekyll/_includes');
-    this.copy('jekyll_index.html', '_/jekyll/index.html');
-    this.template('jekyll_config.yml', '_config.yml');
-
-  } else if ( this.markupLang === "haml" ) {
-    this.mkdir('_/haml');
-    this.copy('haml_index.haml', '_/haml/index.haml');
-
-  } else {
-    this.mkdir('_/html');
-    this.copy('html_index.html', '_/html/index.html');
-  }
+  this.mkdir('app/html');
+  this.template('index.html', 'app/html/index.html');
 };

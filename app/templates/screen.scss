@@ -1,3 +1,15 @@
 // Main Styles
 
-@import "partials/includes";
+@import "imports";
+
+.page { @include background-image( linear-gradient( #ccc, lighten( #ccc, 20% ) ) ); }
+
+.wrapper { width: 980px; margin: 24px auto; @include border-radius( 5px ); border: 3px solid #1c1b39; }
+
+.skeletor { height: 500px; background: transparent url( '../img/Skeletor.jpg' ) left top no-repeat; background-clip:content-box; }
+
+.oval { display: inline-block; width: 300px; height: 100px; margin: 5%; @include border-radius( 50% ); border: 2px solid #3674a9; padding-top: 25px; color: black; }
+
+.oval--horizontal { @extend .oval; @include background-image( linear-gradient( white, darken( white, 20% ) ) ); }
+
+.main { height: 100%; border-top: 3px solid #1c1b39; background-color: white; }

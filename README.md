@@ -6,7 +6,7 @@
 
 ### Yeoman Generators
 
-This one is a basic skeleton for a project ... Yeoman asks if you the project name, what scripting language you'll like, what style preprocessor you want, also any sort of markup language / templating you want.
+A bare bones generator for Yeoman ... Yeoman asks you the project name, what scripting language you'll like and what style preprocessor you want. That's it!
 
 To install generator-skeletor from npm, run:
 

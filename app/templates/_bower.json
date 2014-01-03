@@ -1,10 +1,12 @@
 {
-  "name": "<%= _.slugify(appname) %>",
+  "name": "<%= _.slugify(projectName) %>",
   "version": "0.0.0",
   "dependencies": {
-    "modernizr": "~2.6.2",
-    "jquery": "~1.9.1"<% if (stylesLang === "sass") { %>,
-    "inuit.css": "~5.0.0"<% } %>
+    "modernizr": "~2.7.1",
+    "jquery": "~2.0.3"<% if (stylesLang === "sass") { %>,
+    "inuit.css": "~5.0.0"<% } %><% if (stylesLang === "less") { %>,
+    "inuit.css": "git://github.com/peterwilsoncc/inuit.css.git#LESS",
+    "elements": "git://github.com/dmitryf/elements"<% } %>
   },
   "devDependencies": {}
 }
