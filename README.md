@@ -3,6 +3,7 @@
 [![Build Status](https://secure.travis-ci.org/kuatsure/generator-skeletor.png?branch=master)](https://travis-ci.org/kuatsure/generator-skeletor)
 [![Dependency Status](https://david-dm.org/kuatsure/generator-skeletor.png?theme=shields.io)](https://david-dm.org/kuatsure/generator-skeletor)
 [![Views in the last 24 hours](https://sourcegraph.com/api/repos/github.com/kuatsure/generator-skeletor/counters/views-24h.png)](https://sourcegraph.com/github.com/kuatsure/generator-skeletor)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kuatsure/generator-skeletor/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 ### Yeoman Generators
 
