@@ -19,19 +19,212 @@ describe('skeletor generator', function () {
     }.bind(this));
   });
 
-  it('creates expected files', function (done) {
+  it('creates sass/compass & coffee files', function (done) {
     var expected = [
       // add files you expect to exist here.
-      '.jshintrc',
-      '.editorconfig'
+      '.bowerrc',
+      '.editorconfig',
+      '.gitattributes',
+      '.gitignore',
+      '.travis.yml',
+      '.yo-rc.json',
+      'Gruntfile.coffee',
+      'bower.json',
+      'config.rb',
+      'package.json',
+      'app/fonts',
+      'app/images/Skeletor.jpg',
+      'app/scripts/main.coffee',
+      'app/styles/screen.scss',
+      'app/styles/_imports.scss',
+      'app/styles/_variables.scss',
+      'app/index.html',
+      'app/.htaccess'
     ];
 
     helpers.mockPrompt(this.app, {
-      'someOption': true
+      'scriptsLang': 'coffeescript',
+      'stylesLang': 'sass'
     });
+
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
-      helpers.assertFiles(expected);
+      helpers.assertFile(expected);
+      done();
+    });
+  });
+
+  it('creates less & coffee files', function (done) {
+    var expected = [
+      // add files you expect to exist here.
+      '.bowerrc',
+      '.editorconfig',
+      '.gitattributes',
+      '.gitignore',
+      '.travis.yml',
+      '.yo-rc.json',
+      'Gruntfile.coffee',
+      'bower.json',
+      'package.json',
+      'app/fonts',
+      'app/images/Skeletor.jpg',
+      'app/scripts/main.coffee',
+      'app/styles/screen.less',
+      'app/styles/imports.less',
+      'app/styles/variables.less',
+      'app/index.html',
+      'app/.htaccess'
+    ];
+
+    helpers.mockPrompt(this.app, {
+      'scriptsLang': 'coffeescript',
+      'stylesLang': 'less'
+    });
+
+    this.app.options['skip-install'] = true;
+    this.app.run({}, function () {
+      helpers.assertFile(expected);
+      done();
+    });
+  });
+
+  it('creates vanilla & coffee files', function (done) {
+    var expected = [
+      // add files you expect to exist here.
+      '.bowerrc',
+      '.editorconfig',
+      '.gitattributes',
+      '.gitignore',
+      '.travis.yml',
+      '.yo-rc.json',
+      'Gruntfile.coffee',
+      'bower.json',
+      'package.json',
+      'app/fonts',
+      'app/images/Skeletor.jpg',
+      'app/scripts/main.coffee',
+      'app/styles/screen.css',
+      'app/styles/inuit.css',
+      'app/index.html',
+      'app/.htaccess'
+    ];
+
+    helpers.mockPrompt(this.app, {
+      'scriptsLang': 'coffeescript',
+      'stylesLang': 'vanilla'
+    });
+
+    this.app.options['skip-install'] = true;
+    this.app.run({}, function () {
+      helpers.assertFile(expected);
+      done();
+    });
+  });
+
+  it('creates sass/compass & javascript files', function (done) {
+    var expected = [
+      // add files you expect to exist here.
+      '.bowerrc',
+      '.editorconfig',
+      '.gitattributes',
+      '.gitignore',
+      '.jshintrc',
+      '.travis.yml',
+      '.yo-rc.json',
+      'Gruntfile.coffee',
+      'bower.json',
+      'config.rb',
+      'package.json',
+      'app/fonts',
+      'app/images/Skeletor.jpg',
+      'app/scripts/skel.js',
+      'app/styles/screen.scss',
+      'app/styles/_imports.scss',
+      'app/styles/_variables.scss',
+      'app/index.html',
+      'app/.htaccess'
+    ];
+
+    helpers.mockPrompt(this.app, {
+      'scriptsLang': 'javascript',
+      'stylesLang': 'sass',
+      'projectName': 'skel'
+    });
+
+    this.app.options['skip-install'] = true;
+    this.app.run({}, function () {
+      helpers.assertFile(expected);
+      done();
+    });
+  });
+
+  it('creates less & javascript files', function (done) {
+    var expected = [
+      // add files you expect to exist here.
+      '.bowerrc',
+      '.editorconfig',
+      '.gitattributes',
+      '.gitignore',
+      '.jshintrc',
+      '.travis.yml',
+      '.yo-rc.json',
+      'Gruntfile.coffee',
+      'bower.json',
+      'package.json',
+      'app/fonts',
+      'app/images/Skeletor.jpg',
+      'app/scripts/skel.js',
+      'app/styles/screen.less',
+      'app/styles/imports.less',
+      'app/styles/variables.less',
+      'app/index.html',
+      'app/.htaccess'
+    ];
+
+    helpers.mockPrompt(this.app, {
+      'scriptsLang': 'javascript',
+      'stylesLang': 'less',
+      'projectName': 'skel'
+    });
+
+    this.app.options['skip-install'] = true;
+    this.app.run({}, function () {
+      helpers.assertFile(expected);
+      done();
+    });
+  });
+
+  it('creates vanilla & javascript files', function (done) {
+    var expected = [
+      // add files you expect to exist here.
+      '.bowerrc',
+      '.editorconfig',
+      '.gitattributes',
+      '.gitignore',
+      '.jshintrc',
+      '.travis.yml',
+      '.yo-rc.json',
+      'Gruntfile.coffee',
+      'bower.json',
+      'package.json',
+      'app/fonts',
+      'app/images/Skeletor.jpg',
+      'app/scripts/skel.js',
+      'app/styles/screen.css',
+      'app/styles/inuit.css',
+      'app/index.html',
+      'app/.htaccess'
+    ];
+
+    helpers.mockPrompt(this.app, {
+      'scriptsLang': 'javascript',
+      'stylesLang': 'vanilla',
+      'projectName': 'skel'
+    });
+
+    this.app.options['skip-install'] = true;
+    this.app.run({}, function () {
+      helpers.assertFile(expected);
       done();
     });
   });
