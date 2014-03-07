@@ -1,4 +1,4 @@
-// Main Styles
+/* Main Styles */
 
 @charset "UTF-8";
 
@@ -18,7 +18,7 @@
 
 .skeletor {
   height: 500px;
-  background: transparent url("../img/Skeletor.jpg") left top no-repeat;
+  background: transparent url("../images/Skeletor.jpg") left top no-repeat;
   background-clip: content-box; }
 
 .oval, .oval--horizontal {
