@@ -1,6 +1,6 @@
 {
   "name": "generator-skeletor",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A bare bones generator for Yeoman",
   "keywords": [
     "yeoman-generator"
