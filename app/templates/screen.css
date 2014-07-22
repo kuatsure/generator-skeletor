@@ -3,16 +3,13 @@
 @charset "UTF-8";
 
 .page {
-  background-image: -moz-linear-gradient(#cccccc, #ffffff);
-  background-image: -o-linear-gradient(#cccccc, #ffffff);
-  background-image: -webkit-linear-gradient(#cccccc, #ffffff);
+  padding-top: 24px;
+  padding-bottom: 24px;
   background-image: linear-gradient(#cccccc, #ffffff); }
 
 .wrapper {
   width: 980px;
-  margin: 24px auto;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  margin: 0 auto;
   border-radius: 5px;
   border: 3px solid #1c1b39; }
 
@@ -26,20 +23,19 @@
   width: 300px;
   height: 100px;
   margin: 5%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
   border-radius: 50%;
   border: 2px solid #3674a9;
-  padding-top: 25px;
   color: black; }
 
+  .oval h1, .oval--horizontal h1 {
+    padding-top: 6px;
+    text-align: center; }
+
 .oval--horizontal {
-  background-image: -moz-linear-gradient(#ffffff, #cccccc);
-  background-image: -o-linear-gradient(#ffffff, #cccccc);
-  background-image: -webkit-linear-gradient(#ffffff, #cccccc);
   background-image: linear-gradient(#ffffff, #cccccc); }
 
 .main {
   height: 100%;
   border-top: 3px solid #1c1b39;
+  padding-left: 24px;
   background-color: white; }
