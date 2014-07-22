@@ -149,6 +149,12 @@ module.exports = ( grunt ) ->
         ,
           match: 'YEAR'
           replacement: '<%%= grunt.template.today(\"yyyy\") %>'
+        ,
+          match: 'DESCRIPTION'
+          replacement: '<%%= pkg.description %>'
+        ,
+          match: 'KEYWORDS'
+          replacement: '<%%= pkg.keywords.join(",") %>'
         ]
       scripts:
         files: [
