@@ -1,6 +1,13 @@
 {
   "name": "<%= _.slugify(projectName) %>",
+  "description": "",
+  "author": {
+    "name": "",
+    "email": "",
+    "url": ""
+  },
   "version": "0.0.0",
+  "keywords": [],
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.2",

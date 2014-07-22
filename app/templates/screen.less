@@ -3,14 +3,16 @@
 @import "variables.less";
 @import "imports.less";
 
-.page { .gradient(#ccc, #ccc, lighten( #ccc, 20% ) ); }
+.page { padding-top: 24px; padding-bottom: 24px; .gradient(#ccc, #ccc, lighten( #ccc, 20% ) ); }
 
-.wrapper { width: 980px; margin: 24px auto; .rounded( 5px ); border: 3px solid #1c1b39; }
+.wrapper { width: 980px; margin: 0 auto; .rounded( 5px ); border: 3px solid #1c1b39; }
 
 .skeletor { height: 500px; background: transparent url( '../images/Skeletor.jpg' ) left top no-repeat; background-clip: content-box; }
 
-.oval { display: inline-block; width: 300px; height: 100px; margin: 5%; .rounded( 50% ); border: 2px solid #3674a9; padding-top: 25px; color: black; }
+.oval { display: inline-block; width: 300px; height: 100px; margin: 5%; .rounded( 50% ); border: 2px solid #3674a9; color: black; }
 
 .oval--horizontal { &:extend(.oval); .gradient( white, white, darken( white, 20% ) ); }
 
-.main { height: 100%; border-top: 3px solid #1c1b39; background-color: white; }
+.oval--horizontal h1 { margin-top: 24px; text-align: center; }
+
+.main { height: 100%; border-top: 3px solid #1c1b39; padding-left: 24px; background-color: white; }

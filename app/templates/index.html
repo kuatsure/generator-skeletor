@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<html class="no-js" lang="en">
 <head>
   <title><%= _.slugify(projectName) %></title>
 
   <meta charset='utf-8'>
-
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta name="description" content="" />
-  <meta name="keywords" content="" />
+  <meta name="description" content="@@DESCRIPTION" />
+  <meta name="keywords" content="@@KEYWORDS" />
   <% if ( stylesLang === 'vanilla') { %>
   <link rel="stylesheet" href="styles/inuit.css?today=@@DATE" /><% } %>
   <link rel="stylesheet" href="styles/screen.css?today=@@DATE" />
@@ -22,10 +19,10 @@
 <body class="page">
   <div id="root" class="wrapper">
     <div class="skeletor">
-      <span class="oval--horizontal text--center"><h1>YO!</h1></span>
+      <span class="oval--horizontal"><h1>YO!</h1></span>
     </div>
 
-    <div class="main soft">
+    <div class="main">
       <h2>Skeletor installed <small>whether you wanted him to or not</small>...</h2>
 
       <ul>
@@ -38,7 +35,7 @@
         <li>elements.less</li><% } %>
       </ul>
 
-      <p class="flush--bottom">Now go do something evil!</p>
+      <p>Now go do something evil!</p>
     </div>
   </div>
 

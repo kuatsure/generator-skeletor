@@ -1,15 +1,15 @@
 # generator-skeletor
 
-[![Build Status](https://secure.travis-ci.org/kuatsure/generator-skeletor.png?branch=master)](https://travis-ci.org/kuatsure/generator-skeletor) [![Views in the last 24 hours](https://sourcegraph.com/api/repos/github.com/kuatsure/generator-skeletor/counters/views-24h.png)](https://sourcegraph.com/github.com/kuatsure/generator-skeletor) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kuatsure/generator-skeletor/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+> A bare bones generator for Yeoman
 
-### Yeoman Generators
+[![NPM version](https://badge.fury.io/js/generator-skeletor.svg)](http://badge.fury.io/js/generator-skeletor) [![Build Status](https://secure.travis-ci.org/kuatsure/generator-skeletor.png?branch=master)](https://travis-ci.org/kuatsure/generator-skeletor)
 
-A bare bones generator for Yeoman ... Yeoman asks you the project name, what scripting language you'll like and what style preprocessor you want. That's it!
+## Installation
 
 To install generator-skeletor from npm, run:
 
 ```bash
-$ npm install -g generator-skeletor
+$ [sudo] npm install -g generator-skeletor
 ```
 
 Finally, initiate the generator:
@@ -18,12 +18,27 @@ Finally, initiate the generator:
 $ yo skeletor
 ```
 
-### Getting To Know Yeoman
+Skeletor asks you the project name, what scripting language you'll like and what style preprocessor you want. That's it!
 
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
+## Prepackaged Libraries
 
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
+Skeletor installs some basics to get you started.
 
+### Scripts
+
+  * [jquery](http://jquery.com/)
+  * [modernizr](http://modernizr.com/)
+
+### Styles
+
+  * Sass
+    * [Compass](http://compass-style.org/)
+    * [inuitcss](https://github.com/inuitcss/starter-kit) - [Getting Started](https://github.com/inuitcss/getting-started)
+  * Less
+    * [elements](http://www.lesselements.com/)
+    * [inuitcss fork](https://github.com/peterwilsoncc/inuit.css#LESS)
+  * Vanilla
+    * [inuitcss](https://github.com/inuitcss/starter-kit) - Compiled version
 
 ## License
 

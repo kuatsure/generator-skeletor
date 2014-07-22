@@ -1,4 +1,6 @@
-# Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
+# Generated on <%= (new Date).toISOString().split('T')[0] %> using
+# <%= pkg.name %> <%= pkg.version %>
+
 module.exports = ( grunt ) ->
   # show elapsed time at the end
   require( "time-grunt" ) grunt
@@ -147,6 +149,12 @@ module.exports = ( grunt ) ->
         ,
           match: 'YEAR'
           replacement: '<%%= grunt.template.today(\"yyyy\") %>'
+        ,
+          match: 'DESCRIPTION'
+          replacement: '<%%= pkg.description %>'
+        ,
+          match: 'KEYWORDS'
+          replacement: '<%%= pkg.keywords.join(",") %>'
         ]
       scripts:
         files: [
@@ -206,11 +214,11 @@ module.exports = ( grunt ) ->
 
     connect:
       options:
+        hostname: "localhost"
         port: 9001
         livereload: 35729
       livereload:
         options:
-          hostname: "0.0.0.0"
           base: [
             '<%%= config.temp %>'
             '<%%= config.app %>'
@@ -231,6 +239,9 @@ module.exports = ( grunt ) ->
   grunt.registerTask "build", [ "concurrent:compile", "concurrent:post" ]
 
   grunt.registerTask "serve", "Serve a local copy", ( target ) ->
+    if grunt.option 'allow-remote'
+      grunt.config.set 'connect.options.hostname', '0.0.0.0'
+
     if target is undefined
       grunt.task.run [ "default", "connect:livereload", "watch" ]
 

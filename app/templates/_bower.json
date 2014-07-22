@@ -4,7 +4,7 @@
   "dependencies": {
     "modernizr": "~2.7.1",
     "jquery": "~2.0.3"<% if (stylesLang === "sass") { %>,
-    "inuit.css": "~5.0.0"<% } %><% if (stylesLang === "less") { %>,
+    "inuit-starter-kit": "~0.2.7"<% } %><% if (stylesLang === "less") { %>,
     "inuit.css": "git://github.com/peterwilsoncc/inuit.css.git#LESS",
     "elements": "git://github.com/dmitryf/elements"<% } %>
   },
