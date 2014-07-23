@@ -2,7 +2,7 @@
 
 > A bare bones generator for Yeoman
 
-[![NPM version](https://badge.fury.io/js/generator-skeletor.svg)](http://badge.fury.io/js/generator-skeletor) [![Build Status](https://secure.travis-ci.org/kuatsure/generator-skeletor.png?branch=master)](https://travis-ci.org/kuatsure/generator-skeletor)
+[![Npm Version](http://img.shields.io/npm/v/generator-skeletor.svg)](https://www.npmjs.org/package/generator-skeletor) [![Build Status](https://secure.travis-ci.org/kuatsure/generator-skeletor.png?branch=master)](https://travis-ci.org/kuatsure/generator-skeletor)
 
 ## Installation
 
