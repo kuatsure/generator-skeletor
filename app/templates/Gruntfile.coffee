@@ -24,23 +24,40 @@ module.exports = ( grunt ) ->
 
       styles:
         files: '<%%= config.app %>/styles/{,*/}*.scss'
-        tasks: [ 'compass', 'autoprefixer' ]<% } %><% if ( stylesLang === 'less') { %>
+        tasks: [
+          'compass'
+          'autoprefixer'
+        ]<% } %><% if ( stylesLang === 'less') { %>
 
       styles:
         files: '<%%= config.app %>/styles/{,*/}*.less'
-        tasks: [ 'less', 'autoprefixer' ]<% } %><% if ( stylesLang === 'vanilla') { %>
+        tasks: [
+          'less'
+          'autoprefixer'
+        ]<% } %><% if ( stylesLang === 'vanilla') { %>
 
       styles:
         files: [ '<%%= config.app %>/styles/{,*/}*.css' ]
-        tasks: [ 'copy:styles', 'autoprefixer' ]<% } %><% if ( scriptsLang === 'coffeescript') { %>
+        tasks: [
+          'copy:styles'
+          'autoprefixer'
+        ]<% } %><% if ( scriptsLang === 'coffeescript') { %>
 
       scripts:
         files: [ '<%%= config.app %>/scripts/{,*/}*.coffee' ]
-        tasks: [ 'coffeelint', 'coffee:jitter', 'replace:scripts' ]<% } %><% if ( scriptsLang === 'javascript') { %>
+        tasks: [
+          'coffeelint'
+          'coffee:jitter'
+          'replace:scripts'
+        ]<% } %><% if ( scriptsLang === 'javascript') { %>
 
       scripts:
         files: [ '<%%= config.app %>/scripts/{,*/}*.js' ]
-        tasks: [ 'jshint', 'copy:scripts', 'replace:scripts' ]<% } %>
+        tasks: [
+          'jshint'
+          'copy:scripts'
+          'replace:scripts'
+        ]<% } %>
 
       pages:
         files: [ '<%%= config.app %>/{,*/}*.html' ]
@@ -102,7 +119,7 @@ module.exports = ( grunt ) ->
       imports:
         files:
           '<%%= config.temp %>/scripts/imports-global.js': [
-            '<%%= config.bower %>/jquery/jquery.js',
+            '<%%= config.bower %>/jquery/jquery.js'
             '<%%= config.bower %>/modernizr/modernizr.js'
           ]
 
@@ -140,7 +157,7 @@ module.exports = ( grunt ) ->
     replace:
       options:
         patterns: [
-          match: 'VERSION',
+          match: 'VERSION'
           replacement: '<%%= pkg.version %>'
         ,
           match: 'DATE'
@@ -210,8 +227,14 @@ module.exports = ( grunt ) ->
 
     bump:
       options:
-        files: [ 'package.json', 'bower.json' ]
-        commitFiles: [ 'package.json', 'bower.json' ]
+        files: [
+          'package.json'
+          'bower.json'
+        ]
+        commitFiles: [
+          'package.json'
+          'bower.json'
+        ]
         pushTo: 'origin'
 
     connect:
@@ -233,23 +256,59 @@ module.exports = ( grunt ) ->
           livereload: false
 
     concurrent:
-      lint:     [ <% if ( scriptsLang === 'coffeescript') { %>'coffeelint'<% } %><% if ( scriptsLang === 'javascript') { %>'jshint'<% } %> ]
-      compile:  [ <% if ( stylesLang === 'sass') { %>'compass', <% } %><% if ( stylesLang === 'less') { %>'less', <% } %><% if ( stylesLang === 'vanilla') { %>'copy:styles', <% } %><% if ( scriptsLang === 'coffeescript') { %>'coffee',<% } %><% if ( scriptsLang === 'javascript') { %>'copy:scripts',<% } %> 'concat' ]
-      post:     [ 'autoprefixer', 'replace' ]
-      minify:   [ 'cssmin', 'uglify', 'htmlmin' ]
+      lint: [ <% if ( scriptsLang === 'coffeescript') { %>
+        'coffeelint'<% } %><% if ( scriptsLang === 'javascript') { %>
+        'jshint'<% } %>
+      ]
+      compile: [ <% if ( stylesLang === 'sass') { %>
+        'compass'<% } %><% if ( stylesLang === 'less') { %>
+        'less'<% } %><% if ( stylesLang === 'vanilla') { %>
+        'copy:styles'<% } %><% if ( scriptsLang === 'coffeescript') { %>
+        'coffee'<% } %><% if ( scriptsLang === 'javascript') { %>
+        'copy:scripts'<% } %>
+        'concat'
+      ]
+      post: [
+        'autoprefixer'
+        'replace'
+      ]
+      minify: [
+        'cssmin'
+        'uglify'
+        'htmlmin'
+      ]
 
-  grunt.registerTask 'build', [ 'concurrent:compile', 'concurrent:post' ]
+  grunt.registerTask 'build', [
+    'concurrent:compile'
+    'concurrent:post'
+  ]
 
   grunt.registerTask 'serve', 'Serve a local copy', ( target ) ->
     if grunt.option 'allow-remote'
       grunt.config.set 'connect.options.hostname', '0.0.0.0'
 
     if target is undefined
-      grunt.task.run [ 'default', 'connect:livereload', 'watch' ]
+      grunt.task.run [
+        'default'
+        'connect:livereload'
+        'watch'
+      ]
 
     else if target is 'dist'
-      grunt.task.run [ 'dist', 'connect:dist' ]
+      grunt.task.run [
+        'dist'
+        'connect:dist'
+      ]
 
-  grunt.registerTask 'dist', [ 'clean:dist', 'default', 'concurrent:minify', 'copy:images' ]
+  grunt.registerTask 'dist', [
+    'clean:dist'
+    'default'
+    'concurrent:minify'
+    'copy:images'
+  ]
 
-  grunt.registerTask 'default', [ 'clean:server', 'concurrent:lint', 'build' ]
+  grunt.registerTask 'default', [
+    'clean:server'
+    'concurrent:lint'
+    'build'
+  ]
