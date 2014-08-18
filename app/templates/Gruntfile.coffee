@@ -80,6 +80,7 @@ module.exports = ( grunt ) ->
     compass:
       compile:
         options:
+          sourcemap: true
           config: "config.rb"<% } %><% if ( stylesLang === 'less') { %>
 
     less:
@@ -93,6 +94,7 @@ module.exports = ( grunt ) ->
       jitter:
         options:
           bare: true
+          sourceMap: true
         files:
           "<%%= config.temp %>/scripts/<%%= pkg.name %>.js": [ "<%%= config.app %>/scripts/*.coffee" ]<% } %>
 
