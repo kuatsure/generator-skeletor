@@ -46,7 +46,7 @@ module.exports = ( grunt ) ->
         files: [ '<%%= config.app %>/{,*/}*.html' ]
         tasks: [ 'replace:pages' ]
         options:
-          livereload: true;
+          livereload: true
 
       livereload:
         options:
