@@ -9,3 +9,6 @@ deploy:
   on:
     tags: true
     repo: kuatsure/generator-skeletor
+notifications:
+  slack:
+    secure: JNJY+zMN8GbrdhHBYWwR/DRLGhOhERmjvK4fio5fx70PHdfHcgBxt9OxngN3Tqej2gV2Xh2iJ8jkWhX6/u/E+2pQoysdQD3gVBqg8VEkekQkjULR0dM6Dgjnp5XZTDpbVr0ZXOxQndnGR5cUEaIgR3C6/Zz9tlwcsu1uYemYrvA=
