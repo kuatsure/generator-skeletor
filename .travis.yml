@@ -7,6 +7,7 @@ deploy:
   api_key:
     secure: NerFt5iz9xnkvJcs9F8k4W14P7Rgl+LoKxhDx0cJYDmesgE9ivSOdb2oxWGoppc3do8w6nsePeq1w0lXffLMeA3W3AJKiZsu3HMlfMP7W8qQK/WZ5Ij1/cZA8e1kRVWpX/+rJhEJ5IXUkXsjEanSmuWh9OOpJksSHNxHCEcb03o=
   on:
+    all_branches: true
     tags: true
     repo: kuatsure/generator-skeletor
 notifications:
