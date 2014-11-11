@@ -21,13 +21,16 @@
     "test": "mocha"
   },
   "dependencies": {
-    "yeoman-generator": "~0.16.0"
+    "chalk": "^0.5.1",
+    "shelljs": "^0.1.4",
+    "yeoman-generator": "^0.16.0",
+    "yosay": "^1.0.0"
   },
   "devDependencies": {
-    "mocha": "~1.17.1"
+    "mocha": "~2.0.1"
   },
   "peerDependencies": {
-    "yo": ">=1.0.0-rc.1"
+    "yo": ">=1.0.4"
   },
   "engines": {
     "node": ">=0.8.0",

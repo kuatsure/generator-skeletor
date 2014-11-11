@@ -19,7 +19,7 @@ describe('skeletor generator', function () {
     }.bind(this));
   });
 
-  it('creates sass/compass & coffee files', function (done) {
+  it('creates sass & coffee files', function (done) {
     var expected = [
       // add files you expect to exist here.
       '.bowerrc',
@@ -30,13 +30,12 @@ describe('skeletor generator', function () {
       '.yo-rc.json',
       'Gruntfile.coffee',
       'bower.json',
-      'config.rb',
       'package.json',
+      'Gemfile',
       'app/fonts',
       'app/images/Skeletor.jpg',
       'app/scripts/main.coffee',
       'app/styles/screen.scss',
-      'app/styles/_imports.scss',
       'app/styles/_variables.scss',
       'app/index.html',
       'app/.htaccess'
@@ -70,7 +69,6 @@ describe('skeletor generator', function () {
       'app/images/Skeletor.jpg',
       'app/scripts/main.coffee',
       'app/styles/screen.less',
-      'app/styles/imports.less',
       'app/styles/variables.less',
       'app/index.html',
       'app/.htaccess'
@@ -121,7 +119,7 @@ describe('skeletor generator', function () {
     });
   });
 
-  it('creates sass/compass & javascript files', function (done) {
+  it('creates sass & javascript files', function (done) {
     var expected = [
       // add files you expect to exist here.
       '.bowerrc',
@@ -133,13 +131,12 @@ describe('skeletor generator', function () {
       '.yo-rc.json',
       'Gruntfile.coffee',
       'bower.json',
-      'config.rb',
       'package.json',
+      'Gemfile',
       'app/fonts',
       'app/images/Skeletor.jpg',
       'app/scripts/skel.js',
       'app/styles/screen.scss',
-      'app/styles/_imports.scss',
       'app/styles/_variables.scss',
       'app/index.html',
       'app/.htaccess'
@@ -175,7 +172,6 @@ describe('skeletor generator', function () {
       'app/images/Skeletor.jpg',
       'app/scripts/skel.js',
       'app/styles/screen.less',
-      'app/styles/imports.less',
       'app/styles/variables.less',
       'app/index.html',
       'app/.htaccess'

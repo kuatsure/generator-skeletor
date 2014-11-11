@@ -10,7 +10,6 @@ module.exports = ( grunt ) ->
   # Project configuration.
   grunt.initConfig
     pkg: grunt.file.readJSON 'package.json'
-    bower: grunt.file.readJSON 'bower.json'
 
     config:
       app:      'app'
@@ -25,7 +24,7 @@ module.exports = ( grunt ) ->
       styles:
         files: '<%%= config.app %>/styles/{,*/}*.scss'
         tasks: [
-          'compass'
+          'sass'
           'autoprefixer'
         ]<% } %><% if ( stylesLang === 'less') { %>
 
@@ -94,11 +93,13 @@ module.exports = ( grunt ) ->
       options:
         jshintrc: '.jshintrc'<% } %><% if ( stylesLang === 'sass') { %>
 
-    compass:
-      compile:
-        options:
-          sourcemap: true
-          config: 'config.rb'<% } %><% if ( stylesLang === 'less') { %>
+    sass:
+      options:
+        sourcemap: 'inline'
+        loadPath: '<%%= config.app %>/bower_components'
+      server:
+        files:
+          '<%%= config.temp %>/styles/screen.css': [ '<%%= config.app %>/styles/screen.scss' ]<% } %><% if ( stylesLang === 'less') { %>
 
     less:
       compile:
@@ -204,7 +205,7 @@ module.exports = ( grunt ) ->
         mangle: false
       imports:
         options:
-          banner: '/*! <%%= bower.name %> - v<%%= bower.version %> - <%%= grunt.template.today("yyyy-mm-dd") %> */\n'
+          banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - <%%= grunt.template.today("yyyy-mm-dd") %> */\n'
         files:
           '<%%= config.dist %>/scripts/imports-global.js': [ '<%%= config.temp %>/scripts/imports-global.js' ]
       scripts:
@@ -261,7 +262,7 @@ module.exports = ( grunt ) ->
         'jshint'<% } %>
       ]
       compile: [ <% if ( stylesLang === 'sass') { %>
-        'compass'<% } %><% if ( stylesLang === 'less') { %>
+        'sass'<% } %><% if ( stylesLang === 'less') { %>
         'less'<% } %><% if ( stylesLang === 'vanilla') { %>
         'copy:styles'<% } %><% if ( scriptsLang === 'coffeescript') { %>
         'coffee'<% } %><% if ( scriptsLang === 'javascript') { %>
@@ -284,10 +285,9 @@ module.exports = ( grunt ) ->
   ]
 
   grunt.registerTask 'serve', 'Serve a local copy', ( target ) ->
-    if grunt.option 'allow-remote'
-      grunt.config.set 'connect.options.hostname', '0.0.0.0'
+    grunt.config.set 'connect.options.hostname', '0.0.0.0' if grunt.option 'allow-remote'
 
-    if target is undefined
+    unless target?
       grunt.task.run [
         'default'
         'connect:livereload'

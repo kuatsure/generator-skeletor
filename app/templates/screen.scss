@@ -1,18 +1,31 @@
-// Main Styles
+// Screen Manifest File
 
 @import "variables";
-@import "imports";
 
-.page { padding-top: 24px; padding-bottom: 24px; @include background-image( linear-gradient( #ccc, lighten( #ccc, 20% ) ) ); }
+@import "inuit-defaults/settings.defaults";
 
-.wrapper { width: 980px; margin: 0 auto; @include border-radius( 5px ); border: 3px solid #1c1b39; }
+@import "inuit-functions/tools.functions";
+@import "inuit-mixins/tools.mixins";
+
+@import "inuit-normalize/generic.normalize";
+@import "inuit-box-sizing/generic.box-sizing";
+
+@import "inuit-page/base.page";
+@import "inuit-headings/base.headings";
+@import "inuit-images/base.images";
+@import "inuit-paragraphs/base.paragraphs";
+@import "inuit-lists/base.lists";
+
+.page { padding-top: 24px; padding-bottom: 24px; background-image: linear-gradient( #ccc, lighten( #ccc, 20% ) ); }
+
+.wrapper { width: 980px; margin: 0 auto; border-radius: 5px; border: 3px solid #1c1b39; }
 
 .skeletor { height: 500px; background: transparent url( '../images/Skeletor.jpg' ) left top no-repeat; background-clip: content-box; }
 
-.oval { display: inline-block; width: 300px; height: 100px; margin: 5%; @include border-radius( 50% ); border: 2px solid #3674a9; color: black;
+.oval { display: inline-block; width: 300px; height: 100px; margin: 5%; border-radius: 50%; border: 2px solid #3674a9; color: black;
   h1 { padding-top: 6px; text-align: center; }
 }
 
-.oval--horizontal { @extend .oval; @include background-image( linear-gradient( white, darken( white, 20% ) ) ); }
+.oval--horizontal { @extend .oval; background-image: linear-gradient( white, darken( white, 20% ) ); }
 
 .main { height: 100%; border-top: 3px solid #1c1b39; padding-left: 24px; background-color: white; }

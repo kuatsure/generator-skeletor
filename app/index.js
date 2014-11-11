@@ -2,16 +2,42 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
-
+var yosay = require('yosay');
+var chalk = require('chalk');
+var shelljs = require('shelljs');
+var bundle = false;
 
 var SkeletorGenerator = module.exports = function SkeletorGenerator(args, options, config) {
+  if (this.stylesLang === 'sass') {
+    var dependenciesInstalled = ['bundle', 'ruby'].every(function (depend) {
+      return shelljs.which(depend);
+    });
+
+    if (!dependenciesInstalled) {
+      console.log('Looks like you\'re missing some dependencies.' +
+        '\nMake sure ' + chalk.white('Ruby') + ' and the ' + chalk.white('Bundler gem') + ' are installed, then run again.');
+      shelljs.exit(1);
+    }
+  }
+
   yeoman.generators.Base.apply(this, arguments);
+
+  this.gitInfo = {
+    name: this.user.git.username,
+    email: this.user.git.email,
+  };
+
+  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'] });
-  });
 
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+    if (this.stylesLang === 'sass') {
+      if (bundle === false) {
+        console.log(chalk.yellow.bold('Bundle install failed. Try running the command yourself.'));
+      }
+    }
+  });
 };
 
 util.inherits(SkeletorGenerator, yeoman.generators.Base);
@@ -19,28 +45,42 @@ util.inherits(SkeletorGenerator, yeoman.generators.Base);
 SkeletorGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
 
-  // have Yeoman greet the user.
-  // console.log(this.yeoman);
-  console.log('Everything comes to he who waits... and I have waited so very long for this moment.');
+  console.log(yosay('Everything comes to he who waits... and I have waited so very long for this moment.'));
 
   var prompts = [{
     name: 'projectName',
     message: 'Project Name',
     default: this.appname
+  },{
+    name: 'projectDescription',
+    message: 'Project Description'
+  },{
+    name: 'authorName',
+    message: 'Author Name',
+    default: this.gitInfo.name
+  },{
+    name: 'authorEmail',
+    message: 'Author Email',
+    default: this.gitInfo.email
   }, {
     type: 'list',
     name: 'scriptsLang',
-    message: 'Preferred scripts language',
+    message: 'Preferred scripts language:',
     choices: [ 'coffeescript', 'javascript' ]
   }, {
     type: 'list',
     name: 'stylesLang',
-    message: 'Preferred styles language\n    * Sass comes with compass & inuit.css\n    * Less with elements.less',
+    message: 'Preferred styles language:',
     choices: [ 'sass', 'less', 'vanilla' ]
   }];
 
   this.prompt(prompts, function (props) {
     this.projectName = props.projectName;
+    this.projectDescription = props.projectDescription;
+
+    this.authorName = props.authorName;
+    this.authorEmail = props.authorEmail;
+
     this.scriptsLang = props.scriptsLang;
     this.stylesLang = props.stylesLang;
 
@@ -83,7 +123,7 @@ SkeletorGenerator.prototype.projectfiles = function projectfiles() {
 SkeletorGenerator.prototype.scripts = function scripts() {
   this.mkdir('app/scripts');
 
-  if ( this.scriptsLang === "coffeescript" ) {
+  if ( this.scriptsLang === 'coffeescript' ) {
     this.copy('main.coffee', 'app/scripts/main.coffee');
 
   } else {
@@ -95,16 +135,14 @@ SkeletorGenerator.prototype.scripts = function scripts() {
 SkeletorGenerator.prototype.styles = function styles() {
   this.mkdir('app/styles');
 
-  if ( this.stylesLang === "sass" ) {
+  if ( this.stylesLang === 'sass' ) {
     this.copy('screen.scss', 'app/styles/screen.scss');
-    this.copy('imports.scss', 'app/styles/_imports.scss');
     this.copy('variables.scss', 'app/styles/_variables.scss');
-    this.copy('_config.rb', 'config.rb');
+    this.copy('Gemfile', 'Gemfile');
 
-  } else if ( this.stylesLang === "less" ) {
-    this.copy('imports.less', 'app/styles/imports.less');
-    this.copy('variables.less', 'app/styles/variables.less');
+  } else if ( this.stylesLang === 'less' ) {
     this.copy('screen.less', 'app/styles/screen.less');
+    this.copy('variables.less', 'app/styles/variables.less');
 
   } else {
     this.copy('inuit.css', 'app/styles/inuit.css');
@@ -114,4 +152,28 @@ SkeletorGenerator.prototype.styles = function styles() {
 
 SkeletorGenerator.prototype.markup = function markup() {
   this.template('index.html', 'app/index.html');
+};
+
+SkeletorGenerator.prototype.readme = function readme() {
+  this.template('readme.md', 'README.md');
+};
+
+SkeletorGenerator.prototype.rubies = function rubies() {
+  if (this.options['skip-install'] !== true && this.stylesLang === 'sass') {
+    var execComplete;
+
+    console.log('\nRunning ' + chalk.yellow.bold('bundle install') + ' to install the required gems.');
+
+    this.conflicter.resolve(function (err) {
+      if (err) {
+        return this.emit('error', err);
+      }
+
+      execComplete = shelljs.exec('bundle install');
+
+      if (execComplete.code === 0) {
+        bundle = true;
+      }
+    });
+  }
 };
