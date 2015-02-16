@@ -19,28 +19,28 @@ module.exports = ( grunt ) ->
 
     watch:
       gruntfile:
-        files: [ 'Gruntfile.coffee' ]<% if ( stylesLang === 'sass') { %>
+        files: [ 'Gruntfile.coffee' ]<% if ( stylesLang === 'sass' ) { %>
 
       styles:
         files: '<%%= config.app %>/styles/{,*/}*.{scss,sass}'
         tasks: [
           'sass'
           'autoprefixer'
-        ]<% } %><% if ( stylesLang === 'less') { %>
+        ]<% } %><% if ( stylesLang === 'less' ) { %>
 
       styles:
         files: '<%%= config.app %>/styles/{,*/}*.less'
         tasks: [
           'less'
           'autoprefixer'
-        ]<% } %><% if ( stylesLang === 'vanilla') { %>
+        ]<% } %><% if ( stylesLang === 'vanilla' ) { %>
 
       styles:
         files: [ '<%%= config.app %>/styles/{,*/}*.css' ]
         tasks: [
           'copy:styles'
           'autoprefixer'
-        ]<% } %><% if ( scriptsLang === 'coffeescript') { %>
+        ]<% } %><% if ( scriptsLang === 'coffeescript' ) { %>
 
       scripts:
         files: [ '<%%= config.app %>/scripts/{,*/}*.coffee' ]
@@ -48,7 +48,7 @@ module.exports = ( grunt ) ->
           'coffeelint'
           'coffee'
           'replace:scripts'
-        ]<% } %><% if ( scriptsLang === 'javascript') { %>
+        ]<% } %><% if ( scriptsLang === 'javascript' ) { %>
 
       scripts:
         files: [ '<%%= config.app %>/scripts/{,*/}*.js' ]
@@ -78,7 +78,7 @@ module.exports = ( grunt ) ->
         src: '<%%= config.dist %>'
         dot: true
       server:
-        src: '<%%= config.temp %>'<% if ( scriptsLang === 'coffeescript') { %>
+        src: '<%%= config.temp %>'<% if ( scriptsLang === 'coffeescript' ) { %>
 
     coffeelint:
       options:
@@ -86,12 +86,12 @@ module.exports = ( grunt ) ->
           'level': 'ignore'
         'no_empty_param_list':
           'level': 'error'
-      files: [ '<%%= config.app %>/scripts/*.coffee' ]<% } %><% if ( scriptsLang === 'javascript') { %>
+      files: [ '<%%= config.app %>/scripts/*.coffee' ]<% } %><% if ( scriptsLang === 'javascript' ) { %>
 
     jshint:
       files: [ '<%%= config.app %>/scripts/*.js' ]
       options:
-        jshintrc: '.jshintrc'<% } %><% if ( stylesLang === 'sass') { %>
+        jshintrc: '.jshintrc'<% } %><% if ( stylesLang === 'sass' ) { %>
 
     sass:
       options:
@@ -99,14 +99,14 @@ module.exports = ( grunt ) ->
         loadPath: '<%%= config.app %>/bower_components'
       server:
         files:
-          '<%%= config.temp %>/styles/screen.css': [ '<%%= config.app %>/styles/screen.scss' ]<% } %><% if ( stylesLang === 'less') { %>
+          '<%%= config.temp %>/styles/screen.css': [ '<%%= config.app %>/styles/screen.scss' ]<% } %><% if ( stylesLang === 'less' ) { %>
 
     less:
       compile:
         options:
           paths: [ '<%%= config.app %>/styles' ]
         files:
-          '<%%= config.temp %>/styles/screen.css': '<%%= config.app %>/styles/screen.less'<% } %><% if ( scriptsLang === 'coffeescript') { %>
+          '<%%= config.temp %>/styles/screen.css': '<%%= config.app %>/styles/screen.less'<% } %><% if ( scriptsLang === 'coffeescript' ) { %>
 
     coffee:
       jitter:
@@ -142,13 +142,13 @@ module.exports = ( grunt ) ->
         dot: true
         cwd: '<%%= config.app %>/images'
         dest: '<%%= config.dist %>/images'
-        src: '*.{ico,png,txt,jpg}'<% if ( stylesLang === 'vanilla') { %>
+        src: '*.{ico,png,txt,jpg}'<% if ( stylesLang === 'vanilla' ) { %>
       styles:
         expand: true
         dot: true
         cwd: '<%%= config.app %>/styles'
         dest: '<%%= config.temp %>/styles'
-        src: '*.css'<% } %><% if ( scriptsLang === 'javascript') { %>
+        src: '*.css'<% } %><% if ( scriptsLang === 'javascript' ) { %>
       scripts:
         expand: true
         dot: true
@@ -198,7 +198,7 @@ module.exports = ( grunt ) ->
           keepSpecialComments: 0
           banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - <%%= grunt.template.today("yyyy-mm-dd") %> */'
         files:
-          '<%%= config.dist %>/styles/screen.css': [ '<%%= config.temp %>/styles/screen.css' ]<% if ( stylesLang === 'vanilla') { %>
+          '<%%= config.dist %>/styles/screen.css': [ '<%%= config.temp %>/styles/screen.css' ]<% if ( stylesLang === 'vanilla' ) { %>
           '<%%= config.dist %>/styles/inuit.css': [ '<%%= config.temp %>/styles/inuit.css' ]<% } %>
 
     uglify:
@@ -258,15 +258,15 @@ module.exports = ( grunt ) ->
           livereload: false
 
     concurrent:
-      lint: [ <% if ( scriptsLang === 'coffeescript') { %>
-        'coffeelint'<% } %><% if ( scriptsLang === 'javascript') { %>
+      lint: [ <% if ( scriptsLang === 'coffeescript' ) { %>
+        'coffeelint'<% } %><% if ( scriptsLang === 'javascript' ) { %>
         'jshint'<% } %>
       ]
-      compile: [ <% if ( stylesLang === 'sass') { %>
-        'sass'<% } %><% if ( stylesLang === 'less') { %>
-        'less'<% } %><% if ( stylesLang === 'vanilla') { %>
-        'copy:styles'<% } %><% if ( scriptsLang === 'coffeescript') { %>
-        'coffee'<% } %><% if ( scriptsLang === 'javascript') { %>
+      compile: [ <% if ( stylesLang === 'sass' ) { %>
+        'sass'<% } %><% if ( stylesLang === 'less' ) { %>
+        'less'<% } %><% if ( stylesLang === 'vanilla' ) { %>
+        'copy:styles'<% } %><% if ( scriptsLang === 'coffeescript' ) { %>
+        'coffee'<% } %><% if ( scriptsLang === 'javascript' ) { %>
         'copy:scripts'<% } %>
         'concat'
       ]
