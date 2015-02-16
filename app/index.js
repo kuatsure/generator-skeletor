@@ -23,8 +23,8 @@ var SkeletorGenerator = module.exports = function SkeletorGenerator(args, option
   yeoman.generators.Base.apply(this, arguments);
 
   this.gitInfo = {
-    name: this.user.git.username,
-    email: this.user.git.email,
+    name: shelljs.exec('git config user.name', { silent: true }).output.replace( '\n', '' ),
+    email: shelljs.exec('git config user.email', { silent: true }).output.replace( '\n', '' )
   };
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
