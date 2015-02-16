@@ -22,7 +22,7 @@ module.exports = ( grunt ) ->
         files: [ 'Gruntfile.coffee' ]<% if ( stylesLang === 'sass') { %>
 
       styles:
-        files: '<%%= config.app %>/styles/{,*/}*.scss'
+        files: '<%%= config.app %>/styles/{,*/}*.{scss,sass}'
         tasks: [
           'sass'
           'autoprefixer'
@@ -46,7 +46,7 @@ module.exports = ( grunt ) ->
         files: [ '<%%= config.app %>/scripts/{,*/}*.coffee' ]
         tasks: [
           'coffeelint'
-          'coffee:jitter'
+          'coffee'
           'replace:scripts'
         ]<% } %><% if ( scriptsLang === 'javascript') { %>
 
@@ -70,7 +70,7 @@ module.exports = ( grunt ) ->
         files: [
           '<%%= config.temp %>/styles/{,*/}*.css'
           '<%%= config.temp %>/scripts/{,*/}*.js'
-          '<%%= config.app %>/img/{,*/}*'
+          '<%%= config.app %>/images/{,*/}*'
         ]
 
     clean:
@@ -127,6 +127,7 @@ module.exports = ( grunt ) ->
     autoprefixer:
       options:
         browsers: [ 'last 2 version' ]
+        map: true
       post:
         files: [
           expand: true
