@@ -10,22 +10,22 @@
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.2",
-    "load-grunt-tasks": "~1.0.0",
+    "load-grunt-tasks": "~3.1.0",
     "time-grunt": "~1.0.0",
     "grunt-contrib-clean": "~0.6.0",<% if (scriptsLang === "coffeescript") { %>
     "grunt-contrib-coffee": "~0.12.0",<% } %>
     "grunt-contrib-concat": "~0.5.0",
     "grunt-contrib-connect": "~0.9.0",
     "grunt-contrib-copy": "~0.7.0",
-    "grunt-contrib-cssmin": "~0.10.0",
-    "grunt-contrib-htmlmin": "~0.3.0",<% if (scriptsLang === "javascript") { %>
-    "grunt-contrib-jshint": "~0.10.0",<% } %><% if (stylesLang === "less") { %>
-    "grunt-contrib-less": "~0.12.0",<% } %><% if (stylesLang === "sass") { %>
-    "grunt-contrib-sass": "~0.8.1",<% } %>
-    "grunt-contrib-uglify": "~0.6.0",
+    "grunt-contrib-cssmin": "~0.12.1",
+    "grunt-contrib-htmlmin": "~0.4.0",<% if (scriptsLang === "javascript") { %>
+    "grunt-contrib-jshint": "~0.11.0",<% } %><% if (stylesLang === "less") { %>
+    "grunt-contrib-less": "~1.0.0",<% } %><% if (stylesLang === "sass") { %>
+    "grunt-contrib-sass": "~0.9.2",<% } %>
+    "grunt-contrib-uglify": "~0.7.0",
     "grunt-contrib-watch": "~0.6.1",
-    "grunt-autoprefixer": "~1.0.0",
-    "grunt-bump": "0.0.16",
+    "grunt-autoprefixer": "~2.2.0",
+    "grunt-bump": "0.1.0",
     "grunt-concurrent": "~1.0.0",<% if (scriptsLang === "coffeescript") { %>
     "grunt-coffeelint": "0.0.13",<% } %>
     "grunt-notify": "~0.4.1",
