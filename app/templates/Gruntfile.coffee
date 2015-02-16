@@ -126,8 +126,8 @@ module.exports = ( grunt ) ->
 
     autoprefixer:
       options:
-        browsers: [ 'last 2 version' ]
-        map: true
+        browsers: [ 'last 2 version' ]<% if ( stylesLang === 'sass' ) { %>
+        map: true<% } %>
       post:
         files: [
           expand: true
