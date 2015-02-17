@@ -116,10 +116,10 @@ module.exports = ( grunt ) ->
     coffee:
       jitter:
         options:
-          bare: true
           sourceMap: true
+          sourceRoot: ''
         files:
-          '<%%= config.temp %>/scripts/<%%= pkg.name %>.js': [ '<%%= config.app %>/scripts/*.coffee' ]<% } %>
+          '<%%= config.temp %>/scripts/<%%= pkg.name %>.js': [ '<%%= config.app %>/scripts/{,*/}*.coffee' ]<% } %>
 
     concat:
       imports:
