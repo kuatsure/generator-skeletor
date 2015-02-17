@@ -232,6 +232,18 @@ module.exports = ( grunt ) ->
           dest: '<%%= config.dist %>'
         ]
 
+    imagemin:
+      dist:
+        options:
+          progressive: true
+          optimizationLevel: 3
+        files: [
+          expand: true
+          cwd: '<%%= config.app %>/images'
+          src: '**/*.{jpg,jpeg,png}'
+          dest: '<%%= config.dist %>/images'
+        ]
+
     bump:
       options:
         files: [
@@ -283,6 +295,7 @@ module.exports = ( grunt ) ->
         'cssmin'
         'uglify'
         'htmlmin'
+        'imagemin'
       ]
 
   grunt.registerTask 'build', [
@@ -310,7 +323,6 @@ module.exports = ( grunt ) ->
     'clean:dist'
     'default'
     'concurrent:minify'
-    'copy:images'
   ]
 
   grunt.registerTask 'default', [
