@@ -2,7 +2,9 @@
 
 > A bare bones generator for Yeoman
 
-[![Npm Version](http://img.shields.io/npm/v/generator-skeletor.svg)](https://www.npmjs.org/package/generator-skeletor) [![Build Status](https://secure.travis-ci.org/kuatsure/generator-skeletor.png?branch=master)](https://travis-ci.org/kuatsure/generator-skeletor)
+[![Npm Version](http://img.shields.io/npm/v/generator-skeletor.svg?style=flat-square)](https://www.npmjs.org/package/generator-skeletor)
+[![Build Status](https://img.shields.io/travis/kuatsure/generator-skeletor.svg?style=flat-square)](https://travis-ci.org/kuatsure/generator-skeletor)
+[![Waffle Board](http://img.shields.io/badge/waffle-board-72c7ff.svg?style=flat-square)](https://waffle.io/kuatsure/generator-skeletor)
 
 ## Installation
 
@@ -32,10 +34,8 @@ Skeletor installs some basics to get you started.
 ### Styles
 
   * Sass
-    * [Compass](http://compass-style.org/)
     * [inuitcss](https://github.com/inuitcss/starter-kit) - [Getting Started](https://github.com/inuitcss/getting-started)
   * Less
-    * [elements](http://www.lesselements.com/)
     * [inuitcss fork](https://github.com/peterwilsoncc/inuit.css#LESS)
   * Vanilla
     * [inuitcss](https://github.com/inuitcss/starter-kit) - Compiled version
