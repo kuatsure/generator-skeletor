@@ -96,10 +96,15 @@ module.exports = ( grunt ) ->
     sass:
       options:
         sourcemap: 'inline'
-        loadPath: '<%%= config.app %>/bower_components'
+        loadPath: [ '<%%= config.app %>/bower_components' ]
       server:
-        files:
-          '<%%= config.temp %>/styles/screen.css': [ '<%%= config.app %>/styles/screen.scss' ]<% } %><% if ( stylesLang === 'less' ) { %>
+        files: [
+          expand: true
+          cwd: '<%%= config.app %>/styles'
+          src: '**/*.{scss,sass}'
+          dest: '<%%= config.temp %>/styles'
+          ext: '.css'
+        ]<% } %><% if ( stylesLang === 'less' ) { %>
 
     less:
       compile:
