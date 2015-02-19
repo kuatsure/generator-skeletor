@@ -30,6 +30,7 @@
     "grunt-concurrent": "~1.0.0",<% if (scriptsLang === "coffeescript") { %>
     "grunt-coffeelint": "0.0.13",<% } %>
     "grunt-notify": "~0.4.1",
-    "grunt-replace": "~0.8.0"
+    "grunt-replace": "~0.8.0",
+    "grunt-usemin": "^3.0.0"
   }
 }

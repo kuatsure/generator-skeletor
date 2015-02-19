@@ -21,36 +21,36 @@ module.exports = ( grunt ) ->
       gruntfile:
         files: [ 'Gruntfile.coffee' ]<% if ( stylesLang === 'sass' ) { %>
 
-      styles:
-        files: '<%%= config.app %>/styles/{,*/}*.{scss,sass}'
+      sass:
+        files: [ '<%%= config.app %>/styles/**/*.{scss,sass}' ]
         tasks: [
-          'sass'
-          'autoprefixer'
+          'sass:server'
+          'autoprefixer:server'
         ]<% } %><% if ( stylesLang === 'less' ) { %>
 
-      styles:
+      less:
         files: '<%%= config.app %>/styles/{,*/}*.less'
         tasks: [
           'less'
-          'autoprefixer'
-        ]<% } %><% if ( stylesLang === 'vanilla' ) { %>
+          'autoprefixer:server'
+        ]<% } %>
 
       styles:
         files: [ '<%%= config.app %>/styles/{,*/}*.css' ]
         tasks: [
           'copy:styles'
-          'autoprefixer'
-        ]<% } %><% if ( scriptsLang === 'coffeescript' ) { %>
+          'autoprefixer:server'
+        ]<% if ( scriptsLang === 'coffeescript' ) { %>
 
-      scripts:
+      coffee:
         files: [ '<%%= config.app %>/scripts/{,*/}*.coffee' ]
         tasks: [
           'coffeelint'
-          'coffee'
+          'coffee:dist'
           'replace:scripts'
         ]<% } %><% if ( scriptsLang === 'javascript' ) { %>
 
-      scripts:
+      javascript:
         files: [ '<%%= config.app %>/scripts/{,*/}*.js' ]
         tasks: [
           'jshint'
@@ -59,26 +59,33 @@ module.exports = ( grunt ) ->
         ]<% } %>
 
       pages:
-        files: [ '<%%= config.app %>/{,*/}*.html' ]
-        tasks: [ 'replace:pages' ]
-        options:
-          livereload: true
+        files: [ '<%%= config.app %>/{,*/}*.{html,php}' ]
+        tasks: [
+          'replace:pages'
+        ]
 
       livereload:
         options:
           livereload: '<%%= connect.options.livereload %>'
         files: [
-          '<%%= config.temp %>/styles/{,*/}*.css'
-          '<%%= config.temp %>/scripts/{,*/}*.js'
-          '<%%= config.app %>/images/{,*/}*'
+          '<%%= config.temp %>/**/*.html'
+          '<%%= config.temp %>/styles/**/*.css'
+          '{<%%= config.temp %>,<%%= config.app %>}/scripts/**/*.js'
+          '<%%= config.app %>/images/**/*.{gif,jpg,jpeg,png,svg,webp}'
         ]
 
     clean:
       dist:
-        src: '<%%= config.dist %>'
-        dot: true
-      server:
-        src: '<%%= config.temp %>'<% if ( scriptsLang === 'coffeescript' ) { %>
+        files: [
+          dot: true
+          src: [
+            '<%%= config.dist %>/*'
+            '!<%%= config.dist %>/.git*'
+          ]
+        ]
+      server: [
+        '<%%= config.temp %>'
+      ]<% if ( scriptsLang === 'coffeescript' ) { %>
 
     coffeelint:
       options:
@@ -86,10 +93,10 @@ module.exports = ( grunt ) ->
           'level': 'ignore'
         'no_empty_param_list':
           'level': 'error'
-      files: [ '<%%= config.app %>/scripts/*.coffee' ]<% } %><% if ( scriptsLang === 'javascript' ) { %>
+      files: [ '<%%= config.app %>/scripts/{,*/}*.coffee' ]<% } %><% if ( scriptsLang === 'javascript' ) { %>
 
     jshint:
-      files: [ '<%%= config.app %>/scripts/*.js' ]
+      files: [ '<%%= config.app %>/scripts/{,*/}*.js' ]
       options:
         jshintrc: '.jshintrc'<% } %><% if ( stylesLang === 'sass' ) { %>
 
@@ -114,52 +121,54 @@ module.exports = ( grunt ) ->
           '<%%= config.temp %>/styles/screen.css': '<%%= config.app %>/styles/screen.less'<% } %><% if ( scriptsLang === 'coffeescript' ) { %>
 
     coffee:
-      jitter:
+      dist:
         options:
           sourceMap: true
           sourceRoot: ''
         files:
           '<%%= config.temp %>/scripts/<%%= pkg.name %>.js': [ '<%%= config.app %>/scripts/{,*/}*.coffee' ]<% } %>
 
-    concat:
-      imports:
-        files:
-          '<%%= config.temp %>/scripts/imports-global.js': [
-            '<%%= config.bower %>/jquery/jquery.js'
-            '<%%= config.bower %>/modernizr/modernizr.js'
-          ]
-
     autoprefixer:
       options:
-        browsers: [ 'last 2 version' ]<% if ( stylesLang === 'sass' ) { %>
+        browsers: [ 'last 2 versions' ]<% if ( stylesLang === 'sass' ) { %>
         map: true<% } %>
-      post:
+      dist:
         files: [
           expand: true
-          cwd: '<%%= config.temp %>/styles/'
-          src: '{,*/}*.css'
-          dest: '<%%= config.temp %>/styles/'
+          cwd: '<%%= config.dist %>/styles'
+          src: '**/*.css'
+          dest: '<%%= config.dist %>/styles'
+        ]
+      server:
+        files: [
+          expand: true
+          cwd: '<%%= config.temp %>/styles'
+          src: '**/*.css'
+          dest: '<%%= config.temp %>/styles'
         ]
 
     copy:
-      images:
-        expand: true
-        dot: true
-        cwd: '<%%= config.app %>/images'
-        dest: '<%%= config.dist %>/images'
-        src: '*.{ico,png,txt,jpg}'<% if ( stylesLang === 'vanilla' ) { %>
+      dist:
+        files: [
+          expand: true
+          dot: true
+          cwd: '<%%= config.app %>'
+          src: [
+            'images/**/*'
+            'fonts/**/*'
+            '!**/_*{,/**}'<% if ( scriptsLang === 'javascript' ) { %>
+            'scripts/**/*'<% } %>
+          ]
+          dest: '<%%= config.dist %>'
+        ]
       styles:
-        expand: true
-        dot: true
-        cwd: '<%%= config.app %>/styles'
-        dest: '<%%= config.temp %>/styles'
-        src: '*.css'<% } %><% if ( scriptsLang === 'javascript' ) { %>
-      scripts:
-        expand: true
-        dot: true
-        cwd: '<%%= config.app %>/scripts'
-        dest: '<%%= config.temp %>/scripts'
-        src: '*.js'<% } %>
+        files: [
+          expand: true
+          dot: true
+          cwd: '<%%= config.app %>/styles'
+          src: [ '**/*.css' ]
+          dest: '<%%= config.temp %>/styles'
+        ]
 
     replace:
       options:
@@ -185,7 +194,6 @@ module.exports = ( grunt ) ->
       scripts:
         files: [
           expand: true
-          flatten: true
           src: [ '<%%= config.temp %>/scripts/<%%= pkg.name %>.js' ]
           dest: '<%%= config.temp %>/scripts'
         ]
@@ -193,42 +201,48 @@ module.exports = ( grunt ) ->
         files: [
           expand: true
           flatten: true
-          src: [ '<%%= config.app %>/*.{html,php}' ]
-          dest: '<%%= config.temp %>'
+          src: [
+            '<%%= config.app %>/**/*.{html,php}'
+            '!<%%= config.bower %>/**/*.{html,php}'
+          ]
+          dest: '<%%= config.temp %>/'
+        ]
+      dist:
+        files: [
+          expand: true
+          flatten: true
+          src: [
+            '<%%= config.app %>/**/*.{html,php}'
+            '!<%%= config.bower %>/**/*.{html,php}'
+          ]
+          dest: '<%%= config.dist %>'
         ]
 
-    cssmin:
-      minify:
-        options:
-          keepSpecialComments: 0
-          banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - <%%= grunt.template.today("yyyy-mm-dd") %> */'
-        files:
-          '<%%= config.dist %>/styles/screen.css': [ '<%%= config.temp %>/styles/screen.css' ]<% if ( stylesLang === 'vanilla' ) { %>
-          '<%%= config.dist %>/styles/inuit.css': [ '<%%= config.temp %>/styles/inuit.css' ]<% } %>
+    concat: {}
 
     uglify:
       options:
-        mangle: false
-      imports:
+        banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - <%%= grunt.template.today("yyyy-mm-dd") %> */\n'
+
+    cssmin:
+      options:
+        keepSpecialComments: 0
+        banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - <%%= grunt.template.today("yyyy-mm-dd") %> */'
+      dist:
         options:
-          banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - <%%= grunt.template.today("yyyy-mm-dd") %> */\n'
-        files:
-          '<%%= config.dist %>/scripts/imports-global.js': [ '<%%= config.temp %>/scripts/imports-global.js' ]
-      scripts:
-        options:
-          banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - <%%= grunt.template.today("yyyy-mm-dd") %> */\n'
-        files:
-          '<%%= config.dist %>/scripts/<%%= pkg.name %>.js': [ '<%%= config.temp %>/scripts/<%%= pkg.name %>.js' ]
+          check: 'gzip'
 
     htmlmin:
       dist:
         options:
+          collapseBooleanAttributes: true
           collapseWhitespace: true
-          removeComments: true
+          removeAttributeQuotes: true
+          removeRedundantAttributes: true
         files: [
           expand: true
-          cwd: '<%%= config.temp %>'
-          src: '*.html'
+          cwd: '<%%= config.dist %>'
+          src: [ '**/*.html' ]
           dest: '<%%= config.dist %>'
         ]
 
@@ -243,6 +257,17 @@ module.exports = ( grunt ) ->
           src: '**/*.{jpg,jpeg,png}'
           dest: '<%%= config.dist %>/images'
         ]
+
+    useminPrepare:
+      options:
+        dest: '<%%= config.dist %>'
+      html: [ '<%%= config.dist %>/**/*.html' ]
+
+    usemin:
+      options:
+        assetsDirs: '<%%= config.dist %>'
+      html: [ '<%%= config.dist %>/**/*.html' ]
+      css: [ '<%%= config.dist %>/styles/**/*.css' ]
 
     bump:
       options:
@@ -275,58 +300,58 @@ module.exports = ( grunt ) ->
           livereload: false
 
     concurrent:
-      lint: [ <% if ( scriptsLang === 'coffeescript' ) { %>
-        'coffeelint'<% } %><% if ( scriptsLang === 'javascript' ) { %>
-        'jshint'<% } %>
+      server: [<% if ( stylesLang === 'sass' ) { %>
+        'sass:server'<% } %><% if ( stylesLang === 'less' ) { %>
+        'less'<% } %><% if ( scriptsLang === 'coffeescript' ) { %>
+        'coffee'<% } %>
+        'copy:styles'
       ]
-      compile: [ <% if ( stylesLang === 'sass' ) { %>
-        'sass'<% } %><% if ( stylesLang === 'less' ) { %>
-        'less'<% } %><% if ( stylesLang === 'vanilla' ) { %>
-        'copy:styles'<% } %><% if ( scriptsLang === 'coffeescript' ) { %>
-        'coffee'<% } %><% if ( scriptsLang === 'javascript' ) { %>
-        'copy:scripts'<% } %>
-        'concat'
-      ]
-      post: [
-        'autoprefixer'
-        'replace'
-      ]
-      minify: [
-        'cssmin'
-        'uglify'
-        'htmlmin'
-        'imagemin'
+      dist: [<% if ( stylesLang === 'sass' ) { %>
+        'sass:server'<% } %><% if ( stylesLang === 'less' ) { %>
+        'less'<% } %><% if ( scriptsLang === 'coffeescript' ) { %>
+        'coffee'<% } %>
+        'copy:dist'
       ]
 
-  grunt.registerTask 'build', [
-    'concurrent:compile'
-    'concurrent:post'
-  ]
-
-  grunt.registerTask 'serve', 'Serve a local copy', ( target ) ->
+  grunt.registerTask 'serve', ( target ) ->
     grunt.config.set 'connect.options.hostname', '0.0.0.0' if grunt.option 'allow-remote'
 
-    unless target?
-      grunt.task.run [
-        'default'
-        'connect:livereload'
-        'watch'
+    if target is 'dist'
+      return grunt.task.run [
+        'build'
+        'connect:dist:keepalive'
       ]
 
-    else if target is 'dist'
-      grunt.task.run [
-        'dist'
-        'connect:dist'
-      ]
+    grunt.task.run [
+      'clean:server'
+      'concurrent:server'
+      'replace:pages'
+      'replace:scripts'
+      'autoprefixer:server'
+      'connect:livereload'
+      'watch'
+    ]
+    return
 
-  grunt.registerTask 'dist', [
-    'clean:dist'
-    'default'
-    'concurrent:minify'
+  grunt.registerTask 'build', [
+    'clean'<% if ( scriptsLang === 'coffeescript' ) { %>
+    'coffeelint'<% } %><% if ( scriptsLang === 'javascript' ) { %>
+    'jshint'<% } %>
+    'replace:dist'
+    'concurrent:dist'
+    'replace:scripts'
+    'useminPrepare'
+    'concat'
+    'autoprefixer:dist'
+    'cssmin'
+    'uglify'
+    'imagemin'
+    'usemin'
   ]
 
-  grunt.registerTask 'default', [
-    'clean:server'
-    'concurrent:lint'
+  grunt.registerTask 'default', [<% if ( scriptsLang === 'coffeescript' ) { %>
+    'coffeelint'<% } %><% if ( scriptsLang === 'javascript' ) { %>
+    'jshint'<% } %>
     'build'
   ]
+  return
