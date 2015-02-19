@@ -15,7 +15,7 @@
 
 .skeletor {
   height: 500px;
-  background: transparent url("../images/Skeletor.jpg") left top no-repeat;
+  background: transparent url("/images/Skeletor.jpg") left top no-repeat;
   background-clip: content-box; }
 
 .oval, .oval--horizontal {
