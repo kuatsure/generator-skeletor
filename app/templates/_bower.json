@@ -8,7 +8,8 @@
   }],
   "dependencies": {
     "modernizr": "~2.7.1",
-    "jquery": "~2.0.3"<% if (stylesLang === "sass") { %>,
+    "jquery": "~2.0.3",
+    "lodash": "~3.2.0"<% if (stylesLang === "sass") { %>,
     "inuit-starter-kit": "~0.2.7",
     "inuit-lists": "~0.1.0",
     "inuit-images": "~0.3.2",
