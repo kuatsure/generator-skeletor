@@ -337,9 +337,7 @@ module.exports = ( grunt ) ->
     return
 
   grunt.registerTask 'build', [
-    'clean'<% if ( scriptsLang === 'coffeescript' ) { %>
-    'coffeelint'<% } %><% if ( scriptsLang === 'javascript' ) { %>
-    'jshint'<% } %>
+    'clean'
     'replace:dist'
     'concurrent:dist'
     'replace:scripts'
@@ -354,7 +352,8 @@ module.exports = ( grunt ) ->
 
   grunt.registerTask 'default', [<% if ( scriptsLang === 'coffeescript' ) { %>
     'coffeelint'<% } %><% if ( scriptsLang === 'javascript' ) { %>
-    'jshint'<% } %>
+    'jshint'<% } %><% if ( stylesLang === 'sass' ) { %>
+    'scsslint'<% } %>
     'build'
   ]
   return
