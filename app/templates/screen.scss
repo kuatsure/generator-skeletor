@@ -1,20 +1,20 @@
 // Screen Manifest File
 
-@import "variables";
+@import 'variables';
 
-@import "inuit-defaults/settings.defaults";
+@import 'inuit-defaults/settings.defaults';
 
-@import "inuit-functions/tools.functions";
-@import "inuit-mixins/tools.mixins";
+@import 'inuit-functions/tools.functions';
+@import 'inuit-mixins/tools.mixins';
 
-@import "inuit-normalize/generic.normalize";
-@import "inuit-box-sizing/generic.box-sizing";
+@import 'inuit-normalize/generic.normalize';
+@import 'inuit-box-sizing/generic.box-sizing';
 
-@import "inuit-page/base.page";
-@import "inuit-headings/base.headings";
-@import "inuit-images/base.images";
-@import "inuit-paragraphs/base.paragraphs";
-@import "inuit-lists/base.lists";
+@import 'inuit-page/base.page';
+@import 'inuit-headings/base.headings';
+@import 'inuit-images/base.images';
+@import 'inuit-paragraphs/base.paragraphs';
+@import 'inuit-lists/base.lists';
 
 .page { padding-top: 24px; padding-bottom: 24px; background-image: linear-gradient( #ccc, lighten( #ccc, 20% ) ); }
 

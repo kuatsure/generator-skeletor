@@ -24,6 +24,7 @@ module.exports = ( grunt ) ->
       sass:
         files: [ '<%%= config.app %>/styles/**/*.{scss,sass}' ]
         tasks: [
+          'scsslint'
           'sass:server'
           'autoprefixer:server'
         ]<% } %><% if ( stylesLang === 'less' ) { %>
@@ -95,6 +96,10 @@ module.exports = ( grunt ) ->
       files: [ '<%%= config.app %>/scripts/{,*/}*.js' ]
       options:
         jshintrc: '.jshintrc'<% } %><% if ( stylesLang === 'sass' ) { %>
+
+    scsslint:
+      options: config: '.scss-lint.yml'
+      check: [ '<%%= config.app %>/styles/**/*.scss' ]
 
     sass:
       options:

@@ -1,0 +1,39 @@
+linters:
+  ColorKeyword:
+    enabled: false
+  ColorVariable:
+    enabled: false
+  Comment:
+    enabled: false
+  DeclarationOrder:
+    enabled: false
+  DuplicateProperty:
+    enabled: false
+  ElsePlacement:
+    enabled: false
+  FinalNewline:
+    enabled: false
+  Indentation:
+    enabled: false
+  LeadingZero:
+    enabled: true
+  PropertySortOrder:
+    enabled: false
+  QualifyingElement:
+    enabled: false
+  SelectorFormat:
+    enabled: false
+  SpaceAfterPropertyColon:
+    enabled: false
+  VendorPrefix:
+    enabled: false
+  SpaceBetweenParens:
+    enabled: false
+  ImportantRule:
+    enabled: false
+  NestingDepth:
+    enabled: false
+  UrlFormat:
+    enabled: false
+  MergeableSelector:
+    enabled: false

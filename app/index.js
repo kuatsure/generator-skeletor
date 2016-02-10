@@ -139,6 +139,7 @@ SkeletorGenerator.prototype.styles = function styles() {
   if ( this.stylesLang === 'sass' ) {
     this.copy('screen.scss', 'app/styles/screen.scss');
     this.copy('variables.scss', 'app/styles/_variables.scss');
+    this.copy('scss-lint.yml', '.scss-lint.yml');
     this.copy('Gemfile', 'Gemfile');
 
   } else if ( this.stylesLang === 'less' ) {
