@@ -65,16 +65,6 @@ module.exports = ( grunt ) ->
           'replace:pages'
         ]
 
-      livereload:
-        options:
-          livereload: '<%%= connect.options.livereload %>'
-        files: [
-          '<%%= config.temp %>/**/*.html'
-          '<%%= config.temp %>/styles/**/*.css'
-          '{<%%= config.temp %>,<%%= config.app %>}/scripts/**/*.js'
-          '<%%= config.app %>/images/**/*.{gif,jpg,jpeg,png,svg,webp}'
-        ]
-
     clean:
       dist:
         files: [
@@ -282,23 +272,41 @@ module.exports = ( grunt ) ->
         ]
         pushTo: 'origin'
 
-    connect:
-      options:
-        hostname: 'localhost'
-        port: 9001
-        livereload: 35729
-      livereload:
-        options:
-          base: [
-            '<%%= config.temp %>'
-            '<%%= config.app %>'
+    browserSync:
+      server:
+        bsFiles:
+          src: [
+            '{.tmp,<%%= config.app %>}/styles/**/*.css'
+            '{.tmp,<%%= config.app %>}/scripts/**/*.js'
+            '{<%%= config.app %>}/bower_components/**/*.js'
+            '<%%= config.app %>/images/**/*.{gif,jpg,jpeg,png,svg,webp}'
           ]
-          livereload: true
+        options:
+          server:
+            baseDir: [
+              '.tmp'
+              '<%%= config.app %>'
+            ]
+          watchTask: true
       dist:
         options:
-          base: [ '<%%= config.dist %>' ]
-          keepalive: true
-          livereload: false
+          server:
+            baseDir: '<%%= config.dist %>'
+      test:
+        bsFiles:
+          src: [
+            '{.tmp,<%%= config.app %>}/styles/**/*.css'
+            '{.tmp,<%%= config.app %>}/scripts/**/*.js'
+            '{<%%= config.app %>}/bower_components/**/*.js'
+            '<%%= config.app %>/images/**/*.{gif,jpg,jpeg,png,svg,webp}'
+          ]
+        options:
+          server:
+            baseDir: [
+              '.tmp'
+              '<%%= config.app %>'
+            ]
+          watchTask: true
 
     concurrent:
       server: [<% if ( stylesLang === 'sass' ) { %>
@@ -315,13 +323,7 @@ module.exports = ( grunt ) ->
       ]
 
   grunt.registerTask 'serve', ( target ) ->
-    grunt.config.set 'connect.options.hostname', '0.0.0.0' if grunt.option 'allow-remote'
-
-    if target is 'dist'
-      return grunt.task.run [
-        'build'
-        'connect:dist:keepalive'
-      ]
+    return grunt.task.run [ 'build', 'browserSync:dist' ] if target is 'dist'
 
     grunt.task.run [
       'clean:server'
@@ -329,7 +331,7 @@ module.exports = ( grunt ) ->
       'replace:pages'
       'replace:scripts'
       'autoprefixer:server'
-      'connect:livereload'
+      'browserSync:server'
       'watch'
     ]
     return

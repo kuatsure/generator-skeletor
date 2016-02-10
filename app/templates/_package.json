@@ -17,7 +17,7 @@
     "grunt-contrib-clean": "~0.7.0",<% if (scriptsLang === "coffeescript") { %>
     "grunt-contrib-coffee": "~0.13.0",<% } %>
     "grunt-contrib-concat": "~0.5.1",
-    "grunt-contrib-connect": "~0.11.2",
+    "grunt-browser-sync": "~1.9.0",
     "grunt-contrib-copy": "~0.8.2",
     "grunt-contrib-cssmin": "~0.14.0",
     "grunt-contrib-htmlmin": "~0.6.0",
