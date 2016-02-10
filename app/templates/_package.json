@@ -28,12 +28,13 @@
     "grunt-scss-lint": "~0.3.8",<% } %>
     "grunt-contrib-uglify": "~0.11.1",
     "grunt-contrib-watch": "~0.6.1",
-    "grunt-autoprefixer": "~3.0.3",
+    "grunt-postcss": "~0.7.1",
     "grunt-bump": "~0.7.0",
     "grunt-concurrent": "~2.1.0",<% if (scriptsLang === "coffeescript") { %>
     "grunt-coffeelint": "~0.0.15",<% } %>
     "grunt-notify": "~0.4.3",
     "grunt-replace": "~0.11.0",
-    "grunt-usemin": "~3.1.1"
+    "grunt-usemin": "~3.1.1",
+    "autoprefixer": "~6.3.2"
   }
 }

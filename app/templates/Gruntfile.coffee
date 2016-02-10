@@ -26,21 +26,21 @@ module.exports = ( grunt ) ->
         tasks: [
           'scsslint'
           'sass:server'
-          'autoprefixer:server'
+          'postcss:server'
         ]<% } %><% if ( stylesLang === 'less' ) { %>
 
       less:
         files: '<%%= config.app %>/styles/{,*/}*.less'
         tasks: [
           'less'
-          'autoprefixer:server'
+          'postcss:server'
         ]<% } %>
 
       styles:
         files: [ '<%%= config.app %>/styles/{,*/}*.css' ]
         tasks: [
           'copy:styles'
-          'autoprefixer:server'
+          'postcss:server'
         ]<% if ( scriptsLang === 'coffeescript' ) { %>
 
       coffee:
@@ -119,10 +119,12 @@ module.exports = ( grunt ) ->
         files:
           '<%%= config.temp %>/scripts/<%%= pkg.name %>.js': [ '<%%= config.app %>/scripts/{,*/}*.coffee' ]<% } %>
 
-    autoprefixer:
-      options:
-        browsers: [ 'last 2 versions' ]<% if ( stylesLang === 'sass' ) { %>
+    postcss:
+      options:<% if ( stylesLang === 'sass' ) { %>
         map: true<% } %>
+        processors: [
+          require( 'autoprefixer' ) browsers: 'last 2 versions'
+        ]
       dist:
         files: [
           expand: true
@@ -328,7 +330,7 @@ module.exports = ( grunt ) ->
       'concurrent:server'
       'replace:pages'
       'replace:scripts'
-      'autoprefixer:server'
+      'postcss:server'
       'browserSync:server'
       'watch'
     ]
@@ -341,7 +343,7 @@ module.exports = ( grunt ) ->
     'replace:scripts'
     'useminPrepare'
     'concat'
-    'autoprefixer:dist'
+    'postcss:dist'
     'cssmin'
     'uglify'
     'imagemin'
