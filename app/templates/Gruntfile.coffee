@@ -219,9 +219,7 @@ module.exports = ( grunt ) ->
       options:
         keepSpecialComments: 0
         banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - <%%= grunt.template.today("yyyy-mm-dd") %> */'
-      dist:
-        options:
-          check: 'gzip'
+        check: 'gzip'
 
     htmlmin:
       dist:
