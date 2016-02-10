@@ -126,9 +126,16 @@ module.exports = ( grunt ) ->
           require( 'autoprefixer' ) browsers: 'last 2 versions'
         ]
       dist:
+        options:<% if ( stylesLang === 'sass' ) { %>
+          map: false<% } %>
+          processors: [
+            require( 'autoprefixer' ) browsers: 'last 2 versions'
+            require( 'postcss-discard-comments' ) removeAllButFirst: true
+            require( 'cssnano' )()
+          ]
         files: [
           expand: true
-          cwd: '<%%= config.dist %>/styles'
+          cwd: '<%%= config.temp %>/styles'
           src: '**/*.css'
           dest: '<%%= config.dist %>/styles'
         ]
@@ -190,6 +197,12 @@ module.exports = ( grunt ) ->
           src: [ '<%%= config.temp %>/scripts/<%%= pkg.name %>.js' ]
           dest: '<%%= config.temp %>/scripts'
         ]
+      styles:
+        files: [
+          expand: true
+          src: [ '<%%= config.temp %>/styles/*.css' ]
+          dest: './'
+        ]
       pages:
         files: [
           expand: true
@@ -216,12 +229,6 @@ module.exports = ( grunt ) ->
     uglify:
       options:
         banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - <%%= grunt.template.today("yyyy-mm-dd") %> */\n'
-
-    cssmin:
-      options:
-        keepSpecialComments: 0
-        banner: '/*! <%%= pkg.name %> - v<%%= pkg.version %> - <%%= grunt.template.today("yyyy-mm-dd") %> */'
-        check: 'gzip'
 
     htmlmin:
       dist:
@@ -330,6 +337,7 @@ module.exports = ( grunt ) ->
       'concurrent:server'
       'replace:pages'
       'replace:scripts'
+      'replace:styles'
       'postcss:server'
       'browserSync:server'
       'watch'
@@ -341,10 +349,10 @@ module.exports = ( grunt ) ->
     'replace:dist'
     'concurrent:dist'
     'replace:scripts'
+    'replace:styles'
     'useminPrepare'
     'concat'
     'postcss:dist'
-    'cssmin'
     'uglify'
     'imagemin'
     'usemin'
