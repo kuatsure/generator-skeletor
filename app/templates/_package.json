@@ -9,7 +9,9 @@
   "keywords": [],
   "dependencies": {},
   "devDependencies": {
+    "bower": "~1.7.6",
     "grunt": "~0.4.2",
+    "grunt-cli": "~0.1.13",
     "load-grunt-tasks": "~3.1.0",
     "time-grunt": "~1.0.0",
     "grunt-contrib-clean": "~0.6.0",<% if (scriptsLang === "coffeescript") { %>
