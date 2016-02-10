@@ -88,11 +88,7 @@ module.exports = ( grunt ) ->
       ]<% if ( scriptsLang === 'coffeescript' ) { %>
 
     coffeelint:
-      options:
-        'max_line_length':
-          'level': 'ignore'
-        'no_empty_param_list':
-          'level': 'error'
+      options: configFile: 'coffeelint.json'
       files: [ '<%%= config.app %>/scripts/{,*/}*.coffee' ]<% } %><% if ( scriptsLang === 'javascript' ) { %>
 
     jshint:

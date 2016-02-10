@@ -125,6 +125,7 @@ SkeletorGenerator.prototype.scripts = function scripts() {
 
   if ( this.scriptsLang === 'coffeescript' ) {
     this.copy('main.coffee', 'app/scripts/main.coffee');
+    this.copy('coffeelint.json', 'coffeelint.json');
 
   } else {
     this.copy('main.js', 'app/scripts/' + this.projectName + '.js');
