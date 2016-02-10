@@ -19,18 +19,18 @@
     "grunt-contrib-copy": "~0.7.0",
     "grunt-contrib-cssmin": "~0.12.1",
     "grunt-contrib-htmlmin": "~0.4.0",
-    "grunt-contrib-imagemin": "^0.9.3",<% if (scriptsLang === "javascript") { %>
+    "grunt-contrib-imagemin": "~0.9.3",<% if (scriptsLang === "javascript") { %>
     "grunt-contrib-jshint": "~0.11.0",<% } %><% if (stylesLang === "less") { %>
     "grunt-contrib-less": "~1.0.0",<% } %><% if (stylesLang === "sass") { %>
     "grunt-contrib-sass": "~0.9.2",<% } %>
     "grunt-contrib-uglify": "~0.7.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-autoprefixer": "~2.2.0",
-    "grunt-bump": "0.1.0",
+    "grunt-bump": "~0.1.0",
     "grunt-concurrent": "~1.0.0",<% if (scriptsLang === "coffeescript") { %>
-    "grunt-coffeelint": "0.0.13",<% } %>
+    "grunt-coffeelint": "~0.0.13",<% } %>
     "grunt-notify": "~0.4.1",
     "grunt-replace": "~0.8.0",
-    "grunt-usemin": "^3.0.0"
+    "grunt-usemin": "~3.0.0"
   }
 }
