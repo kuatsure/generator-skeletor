@@ -5,21 +5,8 @@ var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
 var shelljs = require('shelljs');
-var bundle = false;
 
 var SkeletorGenerator = module.exports = function SkeletorGenerator(args, options, config) {
-  if (this.stylesLang === 'sass') {
-    var dependenciesInstalled = ['bundle', 'ruby'].every(function (depend) {
-      return shelljs.which(depend);
-    });
-
-    if (!dependenciesInstalled) {
-      console.log('Looks like you\'re missing some dependencies.' +
-        '\nMake sure ' + chalk.white('Ruby') + ' and the ' + chalk.white('Bundler gem') + ' are installed, then run again.');
-      shelljs.exit(1);
-    }
-  }
-
   yeoman.generators.Base.apply(this, arguments);
 
   this.gitInfo = {
@@ -31,12 +18,6 @@ var SkeletorGenerator = module.exports = function SkeletorGenerator(args, option
 
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'] });
-
-    if (this.stylesLang === 'sass') {
-      if (bundle === false) {
-        console.log(chalk.yellow.bold('Bundle install failed. Try running the command yourself.'));
-      }
-    }
   });
 };
 
@@ -140,7 +121,6 @@ SkeletorGenerator.prototype.styles = function styles() {
     this.copy('screen.scss', 'app/styles/screen.scss');
     this.copy('variables.scss', 'app/styles/_variables.scss');
     this.copy('scss-lint.yml', '.scss-lint.yml');
-    this.copy('Gemfile', 'Gemfile');
 
   } else if ( this.stylesLang === 'less' ) {
     this.copy('screen.less', 'app/styles/screen.less');
@@ -158,24 +138,4 @@ SkeletorGenerator.prototype.markup = function markup() {
 
 SkeletorGenerator.prototype.readme = function readme() {
   this.template('readme.md', 'README.md');
-};
-
-SkeletorGenerator.prototype.rubies = function rubies() {
-  if (this.options['skip-install'] !== true && this.stylesLang === 'sass') {
-    var execComplete;
-
-    console.log('\nRunning ' + chalk.yellow.bold('bundle install') + ' to install the required gems.');
-
-    this.conflicter.resolve(function (err) {
-      if (err) {
-        return this.emit('error', err);
-      }
-
-      execComplete = shelljs.exec('bundle install');
-
-      if (execComplete.code === 0) {
-        bundle = true;
-      }
-    });
-  }
 };

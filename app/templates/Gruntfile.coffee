@@ -26,6 +26,8 @@ module.exports = ( grunt ) ->
         tasks: [
           'scsslint'
           'sass:server'
+          'replace:styles'
+          'replace:map'
           'postcss:server'
         ]<% } %><% if ( stylesLang === 'less' ) { %>
 
@@ -93,8 +95,8 @@ module.exports = ( grunt ) ->
 
     sass:
       options:
-        sourcemap: 'inline'
-        loadPath: [ '<%%= config.app %>/bower_components' ]
+        sourceMap: true
+        includePaths: [ '<%%= config.app %>/bower_components' ]
       server:
         files: [
           expand: true
@@ -202,7 +204,19 @@ module.exports = ( grunt ) ->
           expand: true
           src: [ '<%%= config.temp %>/styles/*.css' ]
           dest: './'
-        ]
+        ]<% if ( stylesLang === 'sass' ) { %>
+      map:
+        options:
+          patterns: [
+            match: /app\//g,
+            replacement: ->
+              return ''
+            ]
+        files: [
+          expand: true
+          src: [ '<%%= config.temp %>/styles/*.map' ]
+          dest: './'
+        ]<% } %>
       pages:
         files: [
           expand: true
@@ -337,7 +351,8 @@ module.exports = ( grunt ) ->
       'concurrent:server'
       'replace:pages'
       'replace:scripts'
-      'replace:styles'
+      'replace:styles'<% if ( stylesLang === 'sass' ) { %>
+      'replace:map'<% } %>
       'postcss:server'
       'browserSync:server'
       'watch'
