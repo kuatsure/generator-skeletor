@@ -3,7 +3,9 @@
   "version": "0.8.0",
   "description": "A bare bones generator for Yeoman",
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "skeletor",
+    "bare-bones"
   ],
   "homepage": "https://github.com/kuatsure/generator-skeletor",
   "bugs": "https://github.com/kuatsure/generator-skeletor/issues",
